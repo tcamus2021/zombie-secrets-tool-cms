@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "zombie_maps",
+  "info": {
+    "singularName": "zombie-map",
+    "pluralName": "zombie-maps",
+    "displayName": "ZombieMaps",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "weight": {
+      "type": "integer"
+    }
+  }
+}
