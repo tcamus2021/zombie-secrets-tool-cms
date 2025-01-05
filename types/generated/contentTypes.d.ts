@@ -369,6 +369,37 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMapStepMapStep extends Struct.CollectionTypeSchema {
+  collectionName: 'map_steps';
+  info: {
+    description: '';
+    displayName: 'MapStep';
+    pluralName: 'map-steps';
+    singularName: 'map-step';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::map-step.map-step'
+    > &
+      Schema.Attribute.Private;
+    maxRound: Schema.Attribute.Integer & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiZombieGameZombieGame extends Struct.CollectionTypeSchema {
   collectionName: 'zombie_games';
   info: {
@@ -390,15 +421,18 @@ export interface ApiZombieGameZombieGame extends Struct.CollectionTypeSchema {
       'api::zombie-game.zombie-game'
     > &
       Schema.Attribute.Private;
-    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    name: Schema.Attribute.String;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    shortName: Schema.Attribute.String;
+    shortName: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    url: Schema.Attribute.String;
-    weight: Schema.Attribute.Integer;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+    weight: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     zombieMaps: Schema.Attribute.Relation<
       'oneToMany',
       'api::zombie-map.zombie-map'
@@ -421,6 +455,7 @@ export interface ApiZombieMapZombieMap extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -429,6 +464,7 @@ export interface ApiZombieMapZombieMap extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    steps: Schema.Attribute.Relation<'oneToMany', 'api::map-step.map-step'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -946,6 +982,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::map-step.map-step': ApiMapStepMapStep;
       'api::zombie-game.zombie-game': ApiZombieGameZombieGame;
       'api::zombie-map.zombie-map': ApiZombieMapZombieMap;
       'plugin::content-releases.release': PluginContentReleasesRelease;

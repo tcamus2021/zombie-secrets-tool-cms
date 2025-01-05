@@ -13,18 +13,22 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "weight": {
-      "type": "integer"
+      "type": "integer",
+      "required": true,
+      "unique": true
     },
     "shortName": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "logo": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
@@ -33,7 +37,9 @@
       ]
     },
     "url": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": false
     },
     "zombieMaps": {
       "type": "relation",

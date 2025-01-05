@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "map_steps",
+  "info": {
+    "singularName": "map-step",
+    "pluralName": "map-steps",
+    "displayName": "MapStep",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "maxRound": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}
